@@ -74,6 +74,26 @@ logo:
   chooser_right: |
     <img src="img/Possu-korp.png" style="margin: 4px;" />
 
+menu:
+  - about:
+      id: about
+      ng-click: $ctrl.citeClick()
+  - docs:
+      href:
+        fin: https://www.kielipankki.fi/tuki/korp/
+        eng: https://www.kielipankki.fi/support/korp/
+        swe: https://www.kielipankki.fi/support/korp/
+      target: _blank
+  - korp:
+      item_id: korplink
+      href: https://www.kielipankki.fi/korp/
+  # - korp_lab:
+  #     item_id: korplablink
+  #     href: /korplabb
+  - import_chain:
+      href: https://spraakbanken.gu.se/sparv
+      target: _blank
+
 auth_module:
   module: "federated_auth"
   options:
