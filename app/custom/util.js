@@ -2,6 +2,19 @@
 // Utility functions for custom components
 
 
+import { loc } from "@/i18n"
+
+
+// Return a link (HTML "a" element) to an SIL page describing the ISO
+// 639-3 language code lang, with the possible translation as
+// attribute "title" (tooltip).
+export function makeLinkIso639_3 (lang) {
+    // Direct "xxx" to "und", but show it as "xxx"
+    const langCode = (lang == "xxx" ? "und" : lang)
+    return `<a href="https://iso639-3.sil.org/code/${langCode}" target="_blank" title="${loc(lang)}">${lang}</a>`
+}
+
+
 // Return the string of contextSize words before and after
 // tokenData.wordData.word.
 export function findContextWords (tokenData, contextSize) {
