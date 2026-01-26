@@ -104,6 +104,10 @@ auth_module:
   # options:
   #   default_value_remember: true
 
+# Licensing mode for corpus access control display
+# - "språkbanken" (default): No license labels shown in corpus chooser
+# - "kielipankki": Show [ACA], [ACA-Fi], [RES] labels based on License field from backend
+licensing_mode: "kielipankki"
 
 autocomplete: true
 map_enabled: true
