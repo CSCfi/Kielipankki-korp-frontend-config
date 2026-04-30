@@ -2,6 +2,10 @@ import { getStringifier } from "@/services/stringify"
 import statemachine from "@/statemachine"
 import { regescape } from "@/util"
 import { Lemgram } from "@/lemgram"
+import { locObj } from "@/i18n"
+
+import { findContextWords } from "custom/util"
+
 
 export default {
     complemgram: {
@@ -215,4 +219,51 @@ export default {
             }
        }]
     }),
+
+    // Link to a KLK page image (custom attribute). options.context
+    // can be set to specify the context size (number of tokens)
+    // (default: 0).
+    klkPageImageLink: (options = {}) => ({
+        template: String.raw`<span>
+            <a ng-href="{{ makeKlkPageImageUrl({sentenceData, wordData, tokens}, context) }}" class="exturl sidebar_link" target="_blank">{{ label }}</a>
+        </span>`,
+        controller: ["$scope", function ($scope) {
+            $scope.makeKlkPageImageUrl = makeKlkPageImageUrl
+            $scope.context = options.context ?? 0
+            $scope.label = locObj($scope.attrs.label)
+        }],
+    }),
+
+    // Link to KLK PDF download (custom attribute).
+    klkDownloadPdfLink: {
+        template: String.raw`<span>
+            <a ng-href="{{ makeKlkUrlBase(sentenceData) }}/pdf" class="exturl sidebar_link" target="_blank">{{ label }}</a>
+        </span>`,
+        controller: ["$scope", function ($scope) {
+            $scope.makeKlkUrlBase = makeKlkUrlBase
+            $scope.label = locObj($scope.attrs.label)
+        }],
+    },
+
+}
+
+
+// Internal functions
+
+// Return a KLK URL base for a publication with sentenceData.
+function makeKlkUrlBase (sentenceData) {
+    return ("http://digi.kansalliskirjasto.fi/"
+            + sentenceData.text_publ_type
+            + "/binding/"
+            + sentenceData.text_binding_id)
+}
+
+// Return a KLK page image URL for a token with tokenData (containing
+// at least wordData, sentenceData and tokens), with context of
+// contextSize tokens.
+function makeKlkPageImageUrl (tokenData, contextSize) {
+    const words = findContextWords(tokenData, contextSize)
+    return (makeKlkUrlBase(tokenData.sentenceData)
+            + "?page=" + tokenData.sentenceData.text_page_no)
+            + (words ? "&term=" + words : "")
 }

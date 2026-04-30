@@ -98,6 +98,7 @@
     "log_out": "Kirjaudu ulos",
     "strict": "tarkka",
     "parsing_demo": "Jäsennä omaa tekstiä",
+    "import_chain": "Sparv",
     "show_deptree": "Näytä dependenssipuu",
     "dep_tree": "Dependenssipuu",
     "download": "Lataa tiedostona muodossa:",
