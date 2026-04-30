@@ -5,9 +5,9 @@ const minkImgPath = require("custom/mink.svg")
 settings["auth_module"] = {
     module: "federated_auth",
     options: {
-        jwt_url: "https://www.kielipankki.fi/future/mink/auth/jwt",
-        login_service: "https://www.kielipankki.fi/future/mink/auth/login",
-        logout_service: "https://www.kielipankki.fi/future/mink/auth/logout",
+        jwt_url: "https://www.kielipankki.fi/api/auth/jwt",
+        login_service: "https://www.kielipankki.fi/secure/auth/",
+        logout_service: "https://www.kielipankki.fi/secure/redirect_uri?logout=https%3A%2F%2Fwww.kielipankki.fi%2F",
     },
 }
 
