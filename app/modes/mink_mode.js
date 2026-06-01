@@ -25,6 +25,10 @@ settings["map_enabled"] = true
 
 settings["config_dependent_on_authentication"] = true
 
+// Mink corpora are private; never load or show anything (not even corpus names)
+// to anonymous users. Redirect them to login before any config is fetched.
+settings["require_login"] = true
+
 settings["get_corpus_ids"] = async () => {
     const {auth} = await import("@/auth/auth")
     if (!auth.isLoggedIn()) return undefined
